@@ -18,6 +18,7 @@
 
     <!-- Canvas Confetti -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.4/dist/confetti.browser.min.js"></script>
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.1.0/model-viewer.min.js"></script>
 
     <!-- Estilos y Tailwind -->
     <link rel="stylesheet" href="styles.css">
@@ -33,26 +34,19 @@
         <div class="flex items-center gap-3 bg-vinotinto-950/70 backdrop-blur-md px-5 py-2.5 rounded-full border border-oro/30 shadow-lg">
             <span class="text-oro font-cinzel font-bold text-sm sm:text-base tracking-widest">Hoy, 11 de octubre · 3 meses</span>
         </div>
-
-        <div class="flex items-center gap-3">
-            <button onclick="alternarReproduccion()" id="botonAudioEncabezado" class="bg-vinotinto-950/80 hover:bg-vinotinto-900 text-rubor-200 border border-oro/30 px-4 py-2 rounded-full text-xs sm:text-sm flex items-center gap-2 shadow-lg transition-all">
-                <i id="iconoAudioEncabezado" class="fa-solid fa-music text-oro"></i>
-                <span id="textoAudioEncabezado">Música</span>
-            </button>
-        </div>
     </header>
 
     <!-- Sección Principal / Título y Contador -->
-    <section class="relative z-20 text-center max-w-4xl mx-auto px-4 my-6">
-        <h1 class="font-serif text-3xl sm:text-5xl md:text-6xl font-bold text-white tracking-tight drop-shadow-md">
+    <section class="portada-principal relative z-20 text-center max-w-4xl mx-auto px-4 my-6">
+        <h1 class="titulo-portada font-serif text-3xl sm:text-5xl md:text-6xl font-bold text-white tracking-tight drop-shadow-md">
             Aunque estés en el Huila, no dejo de pensarte loviuuu muak
         </h1>
-        <p class="font-manuscrita text-2xl sm:text-3xl text-oro mt-2 drop-shadow">
+        <p class="frase-portada font-manuscrita text-2xl sm:text-3xl text-oro mt-2 drop-shadow">
             "Pos ante todo lo que nos ha pasado en este poco tiempo, solo se q elegirnos fue lo mejor de ese mierdero de call, y q no me arrepiento de nada, te amo mi bonita"
         </p>
 
         <!-- Contador del aniversario -->
-        <div class="inline-flex flex-wrap justify-center items-center gap-3 sm:gap-6 my-6 bg-vinotinto-950/80 backdrop-blur-md px-6 py-3 rounded-2xl border border-oro/30 shadow-2xl">
+        <div class="contador-aniversario inline-flex flex-wrap justify-center items-center gap-3 sm:gap-6 my-6 bg-vinotinto-950/80 backdrop-blur-md px-6 py-3 rounded-2xl border border-oro/30 shadow-2xl">
             <div class="text-center px-2">
                 <span id="contadorDias" class="font-cinzel text-2xl sm:text-4xl font-bold text-oro block">90</span>
                 <span class="text-[10px] sm:text-xs text-rubor-300 font-medium uppercase tracking-wider">Días</span>
@@ -159,11 +153,11 @@
                     <div class="absolute inset-0 bg-gradient-to-t from-vinotinto-950/80 via-transparent to-transparent"></div>
                     <div class="absolute bottom-2 left-3 right-3 text-left">
                         <span class="text-[10px] text-black uppercase tracking-widest font-semibold block">loko for you maxotaaa</span>
-                        <h3 class="font-serif text-sm font-bold text-white truncate">Universe · Te Amo</h3>
                     </div>
                 </div>
+                <h3 class="nombre-cancion font-serif text-lg font-bold text-white mb-3">Universe · Te Amo</h3>
 
-                <audio id="audioCancion" preload="metadata">
+                <audio id="audioCancion" autoplay preload="auto">
                     <source src="Img/Universe%20-%20Te%20Amo.mp3" type="audio/mpeg">
                 </audio>
 
@@ -204,20 +198,22 @@
             <h2 id="tituloRegalo" class="font-serif text-2xl sm:text-3xl font-bold text-white mt-2">Te tengo un regalo mi bonita</h2>
             <p class="text-rubor-200 mt-2 mb-4">No te vayas a aprovechar amor</p>
 
-            <!-- Botón interactivo que contiene al gatito 3D -->
-            <button id="botonAbrirRegalo" class="boton-gatito-magico mx-auto focus:outline-none" type="button" aria-expanded="false" aria-controls="contenidoCupon">
-                <div class="w-48 h-48 sm:w-56 sm:h-56 mx-auto rounded-3xl overflow-hidden border-2 border-oro/50 bg-vinotinto-900/50 shadow-2xl transition-transform hover:scale-105">
-                    <model-viewer 
+            <!-- Botón para abrir el regalo con el gatito 3D -->
+            <button id="botonAbrirRegalo" class="boton-gatito-magico mx-auto" type="button" aria-expanded="false" aria-controls="contenidoCupon">
+                <span class="marco-modelo-gatito">
+                    <model-viewer
                         id="modeloGatito"
-                        src="Img/gatito.glb" 
-                        alt="Gatito con regalo" 
-                        auto-rotate 
-                        camera-controls 
-                        disable-zoom
+                        src="Img/gatito.glb"
+                        alt="Gatito con regalo"
+                        loading="eager"
+                        reveal="auto"
+                        camera-orbit="0deg 75deg 115%"
+                        camera-target="auto"
+                        field-of-view="30deg"
                         shadow-intensity="1"
-                        style="width: 100%; height: 100%; pointer-events: none;">
+                        exposure="1.15">
                     </model-viewer>
-                </div>
+                </span>
                 <span id="textoBotonRegalo" class="block mt-4 font-cinzel text-sm font-bold text-oro tracking-widest uppercase">Toca aquí amor</span>
             </button>
 
@@ -231,14 +227,14 @@
     </section>
 
     <!-- Sección de Carta / Mensaje final -->
-    <section class="relative z-20 max-w-3xl mx-auto px-4 mt-8">
-        <div class="bg-vinotinto-950/80 backdrop-blur-md rounded-3xl p-6 sm:p-10 border border-oro/30 shadow-2xl relative overflow-hidden">
+    <section class="carta-final relative z-20 max-w-3xl mx-auto px-4 mt-8">
+        <div class="marco-carta-final bg-vinotinto-950/80 backdrop-blur-md rounded-3xl p-6 sm:p-10 border border-oro/30 shadow-2xl relative overflow-hidden">
             <div class="absolute -right-10 -bottom-10 text-vinotinto-800/20 text-9xl font-serif pointer-events-none select-none">❤</div>
-            <h2 class="font-serif text-2xl sm:text-3xl font-bold text-white mb-4">
+            <h2 class="titulo-carta-final font-serif text-2xl sm:text-3xl font-bold text-white mb-4">
                 TE SUPER TE AMO MI BONITA 
             </h2>
 
-            <div class="space-y-4 text-rubor-100 font-sans text-sm sm:text-base leading-relaxed font-light">
+            <div class="texto-carta-final space-y-4 text-rubor-100 font-sans text-sm sm:text-base leading-relaxed font-light">
                 <p>
                     Parece increíble que ya hayan pasado <strong class="text-oro font-semibold">3 meses</strong> desde ese 11 de julio (de tanta espera esos tres días antes me iba a matar jsdksdkjs, q me acuerdo me dañaste mi pedida de noviazgo), y aunque hoy estés en el Huila en super asados, no dejo de pensarte: acá esperanding a q vuelvas.
                 </p>
@@ -248,12 +244,15 @@
                 <p>
                     Ahh mándame más fotitos de tu carita &lt;3
                 </p>
+                <p>
+                    Y pues acá entre nos me encantasssss, maxootaaaa lindaa, esto de ser victima tuya esta chevere jdskds, uno q otro berrinche pero nada del otro mundo &lt;3
+                </p>
             </div>
 
-            <div class="mt-6 pt-4 border-t border-vinotinto-800 flex flex-col sm:flex-row justify-between items-center gap-3">
-                <span class="font-manuscrita text-2xl text-oro">Por siempre tuyo el super cansón</span>
-                <button onclick="lanzarLluviaCorazones()" class="boton-corazones text-xs text-rubor-300 hover:text-oro underline decoration-oro/50 transition-colors">Picos en la cuerpa y en esa dos grandes razones</button>
-            </div>
+            <footer class="pie-carta-final mt-6 pt-4 border-t border-vinotinto-800 flex flex-col sm:flex-row justify-between items-center gap-3">
+                <span class="firma-carta font-manuscrita text-2xl text-oro">Por siempre tuyo el super cansón</span>
+                <button type="button" onclick="lanzarLluviaCorazones()" class="boton-corazones text-xs text-rubor-300 hover:text-oro underline decoration-oro/50 transition-colors">Picos en la cuerpa y en esa dos grandes razones</button>
+            </footer>
         </div>
     </section>
 

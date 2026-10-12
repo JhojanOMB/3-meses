@@ -2,8 +2,24 @@ const extensionesImagen = ["jpg", "jpeg", "png", "webp"];
 const duracionCancion = document.getElementById("audioCancion");
 const lienzoEstrellas = document.getElementById("lienzoEstrellas");
 const contextoEstrellas = lienzoEstrellas?.getContext("2d");
+const modeloGatito = document.getElementById("modeloGatito");
 let estrellas = [];
 let formasCorazon = null;
+
+function animarGatitoDeLadoALado() {
+    if (!modeloGatito || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    const amplitud = 25 * (Math.PI / 180);
+    const duracionMovimiento = 5000;
+    const mover = (tiempo) => {
+        const fase = (tiempo % duracionMovimiento) / duracionMovimiento;
+        const angulo = Math.sin(fase * Math.PI * 2) * amplitud;
+        modeloGatito.setAttribute("camera-orbit", `${angulo}rad 75deg 115%`);
+        window.requestAnimationFrame(mover);
+    };
+
+    window.requestAnimationFrame(mover);
+}
 
 function cargarImagenNumerada(imagen) {
     const { serie, numero, alternativa } = imagen.dataset;
@@ -60,15 +76,20 @@ function actualizarIconosReproductor() {
     const boton = document.getElementById("botonReproduccion");
     const iconoEncabezado = document.getElementById("iconoAudioEncabezado");
     const textoEncabezado = document.getElementById("textoAudioEncabezado");
-    if (!duracionCancion || !icono || !boton || !iconoEncabezado || !textoEncabezado) return;
+    if (!duracionCancion || !icono || !boton) return;
 
     const reproduciendo = !duracionCancion.paused;
-    icono.className = reproduciendo ? "fa-solid fa-pause" : "fa-solid fa-play ml-0.5";
+    icono.classList.toggle("fa-play", !reproduciendo);
+    icono.classList.toggle("fa-pause", reproduciendo);
+    icono.classList.toggle("ml-0.5", !reproduciendo);
     boton.setAttribute("aria-label", reproduciendo ? "Pausar canción" : "Reproducir canción");
-    iconoEncabezado.className = reproduciendo
-        ? "fa-solid fa-volume-high text-oro"
-        : "fa-solid fa-music text-oro";
-    textoEncabezado.textContent = reproduciendo ? "Sonando..." : "Música";
+    if (iconoEncabezado) {
+        iconoEncabezado.classList.toggle("fa-music", !reproduciendo);
+        iconoEncabezado.classList.toggle("fa-volume-high", reproduciendo);
+    }
+    if (textoEncabezado) {
+        textoEncabezado.textContent = reproduciendo ? "Sonando..." : "Música";
+    }
 }
 
 function formatearTiempo(segundos) {
@@ -171,9 +192,10 @@ function lanzarConfeti() {
 }
 
 function lanzarLluviaCorazones() {
+    crearCorazonesAnimados();
+
     if (!window.confetti || typeof window.confetti.shapeFromText !== "function") {
-        console.error("No se pudo cargar el efecto de corazones de canvas-confetti.");
-        mostrarAviso("No se pudo cargar la animación de corazones. Recarga la página e inténtalo otra vez.", true);
+        console.warn("No se pudo cargar canvas-confetti; se mostrarán los corazones animados de respaldo.");
         return;
     }
 
@@ -183,22 +205,46 @@ function lanzarLluviaCorazones() {
             window.confetti.shapeFromText({ text: "♥", scalar: 1.1, color })
         );
     }
-    [0, 180, 360].forEach(retraso => {
+    [0, 180, 360, 540, 720].forEach(retraso => {
         window.setTimeout(() => {
             window.confetti({
-                particleCount: 24,
-                angle: 90,
-                spread: 100,
-                startVelocity: 28,
-                gravity: 0.7,
-                ticks: 180,
-                scalar: 1.1,
+                particleCount: 18,
+                angle: 270,
+                spread: 36,
+                startVelocity: 9,
+                gravity: 0.9,
+                ticks: 300,
+                scalar: 1.2,
                 shapes: formasCorazon,
-                origin: { x: 0.3 + Math.random() * 0.4, y: 0.7 },
+                origin: { x: Math.random(), y: 0.02 },
                 disableForReducedMotion: true
             });
         }, retraso);
     });
+}
+
+function crearCorazonesAnimados() {
+    const colores = ["#b81932", "#ff5c8a", "#ffccd5", "#d4af37"];
+    const cantidad = 42;
+
+    for (let indice = 0; indice < cantidad; indice += 1) {
+        const corazon = document.createElement("span");
+        const demora = Math.random() * 1.4;
+        const duracion = 2.8 + Math.random() * 2.4;
+        corazon.className = "corazon-lluvia";
+        corazon.textContent = "♥";
+        corazon.setAttribute("aria-hidden", "true");
+        corazon.style.setProperty("--posicion-x", `${Math.random() * 100}vw`);
+        corazon.style.setProperty("--duracion-caida", `${duracion}s`);
+        corazon.style.setProperty("--retraso-caida", `${demora}s`);
+        corazon.style.setProperty("--deriva-x", `${Math.random() * 160 - 80}px`);
+        corazon.style.setProperty("--giro-corazon", `${Math.random() * 100 - 50}deg`);
+        corazon.style.setProperty("--color-corazon", colores[indice % colores.length]);
+        corazon.style.setProperty("--tamano-corazon", `${16 + Math.random() * 24}px`);
+        corazon.addEventListener("animationend", () => corazon.remove(), { once: true });
+        document.body.append(corazon);
+        window.setTimeout(() => corazon.remove(), (demora + duracion + 0.5) * 1000);
+    }
 }
 
 function alternarRegalo() {
@@ -210,7 +256,7 @@ function alternarRegalo() {
     const abierto = boton.getAttribute("aria-expanded") === "true";
     boton.setAttribute("aria-expanded", String(!abierto));
     boton.classList.toggle("regalo-abierto", !abierto);
-    texto.textContent = abierto ? "Abrir mi regalo" : "Cerrar regalo";
+    texto.textContent = abierto ? "Toca aquí amor" : "Cerrar regalo";
     cupon.hidden = abierto;
     cupon.classList.toggle("cupon-visible", !abierto);
 
@@ -259,6 +305,7 @@ window.lanzarConfeti = lanzarConfeti;
 window.lanzarLluviaCorazones = lanzarLluviaCorazones;
 
 document.getElementById("botonAbrirRegalo")?.addEventListener("click", alternarRegalo);
+customElements.whenDefined("model-viewer").then(animarGatitoDeLadoALado);
 
 try {
     cargarImagenesFijas();
@@ -268,6 +315,7 @@ try {
 }
 
 if (duracionCancion) {
+    actualizarIconosReproductor();
     duracionCancion.addEventListener("loadedmetadata", actualizarReproductor);
     duracionCancion.addEventListener("timeupdate", actualizarReproductor);
     duracionCancion.addEventListener("play", actualizarIconosReproductor);
@@ -276,6 +324,21 @@ if (duracionCancion) {
     duracionCancion.addEventListener("error", () => {
         console.error("El navegador no pudo leer Universe - Te Amo.mp3.", duracionCancion.error);
         mostrarAviso("El navegador no pudo leer Universe - Te Amo.mp3. Verifica que sea un archivo MP3 válido.", true);
+    });
+
+    duracionCancion.play().catch(error => {
+        if (error.name !== "NotAllowedError") {
+            console.error("No se pudo iniciar la canción Universe - Te Amo al abrir la página.", error);
+            mostrarAviso("No se pudo iniciar la canción. Comprueba que el archivo siga dentro de Img.", true);
+            return;
+        }
+
+        console.info("El navegador bloqueó la reproducción automática; se iniciará al primer toque o clic.");
+        document.addEventListener("click", () => {
+            if (duracionCancion.paused) {
+                alternarReproduccion();
+            }
+        }, { once: true });
     });
 }
 

@@ -25,6 +25,55 @@ body {
     font-family: "Montserrat", sans-serif;
 }
 
+.portada-principal {
+    padding-top: 1.25rem;
+    padding-bottom: 1.15rem;
+}
+
+.sello-portada {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    margin-bottom: 1rem;
+    padding: 0.4rem 0.9rem;
+    border: 1px solid rgba(248, 231, 155, 0.38);
+    border-radius: 999px;
+    background: rgba(34, 3, 10, 0.68);
+    color: var(--dorado-claro);
+    font-family: "Cinzel", serif;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    box-shadow: 0 8px 25px rgba(18, 1, 5, 0.22);
+}
+
+.sello-portada span {
+    color: var(--rubor-200);
+}
+
+.titulo-portada {
+    max-width: 58rem;
+    margin-inline: auto;
+    text-wrap: balance;
+    text-shadow: 0 4px 26px rgba(255, 204, 213, 0.2), 0 3px 12px rgba(0, 0, 0, 0.5);
+}
+
+.frase-portada {
+    max-width: 48rem;
+    margin: 1rem auto 0;
+    padding: 0.8rem 1rem;
+    border-top: 1px solid rgba(248, 231, 155, 0.22);
+    border-bottom: 1px solid rgba(248, 231, 155, 0.22);
+    color: var(--rubor-200);
+    line-height: 1.35;
+    text-wrap: pretty;
+}
+
+.contador-aniversario {
+    box-shadow: 0 16px 38px rgba(18, 1, 5, 0.35), inset 0 1px rgba(255, 255, 255, 0.04);
+}
+
 .fondo-collage {
     background:
         radial-gradient(ellipse at 50% 20%, rgba(138, 19, 39, 0.42), transparent 48%),
@@ -142,6 +191,40 @@ main {
 
 .regalo-seccion {
     scroll-margin-top: 1.5rem;
+}
+
+.boton-gatito-magico {
+    display: block;
+    width: min(100%, 18rem);
+    padding: 0.5rem;
+    border: 0;
+    border-radius: 1.5rem;
+    background: transparent;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.boton-gatito-magico:focus-visible {
+    outline: 2px solid var(--dorado-claro);
+    outline-offset: 5px;
+}
+
+.marco-modelo-gatito {
+    display: block;
+    width: 100%;
+    aspect-ratio: 1;
+    overflow: hidden;
+    transition: transform 300ms ease, box-shadow 300ms ease;
+}
+
+
+#modeloGatito {
+    display: block;
+    width: 100%;
+    height: 100%;
+    --poster-color: transparent;
+    --progress-bar-color: var(--dorado);
+    --progress-mask: rgba(18, 1, 5, 0.8);
 }
 
 .boton-abrir-regalo {
@@ -508,6 +591,120 @@ main {
 
 .aviso-pagina.aviso-error {
     border-color: #ff8b8b;
+}
+
+.marco-carta-final {
+    border-color: rgba(248, 231, 155, 0.35);
+    background:
+        radial-gradient(ellipse at 100% 100%, rgba(184, 25, 50, 0.2), transparent 42%),
+        linear-gradient(145deg, rgba(61, 7, 18, 0.94), rgba(18, 1, 5, 0.95));
+    box-shadow: 0 24px 65px rgba(0, 0, 0, 0.35), inset 0 1px rgba(255, 255, 255, 0.04);
+}
+
+.titulo-carta-final {
+    position: relative;
+    z-index: 1;
+    padding-bottom: 0.85rem;
+    border-bottom: 1px solid rgba(248, 231, 155, 0.24);
+    letter-spacing: 0.025em;
+    text-wrap: balance;
+}
+
+.texto-carta-final {
+    position: relative;
+    z-index: 1;
+}
+
+.pie-carta-final {
+    position: relative;
+    z-index: 1;
+    border-color: rgba(248, 231, 155, 0.25);
+}
+
+.firma-carta {
+    text-align: center;
+    text-wrap: balance;
+}
+
+.boton-corazones {
+    display: inline-flex;
+    min-height: 2.75rem;
+    align-items: center;
+    justify-content: center;
+    gap: 0.55rem;
+    padding: 0.65rem 1rem;
+    border: 1px solid rgba(248, 231, 155, 0.48);
+    border-radius: 999px;
+    background: rgba(184, 25, 50, 0.22);
+    color: var(--rubor-100);
+    font-size: 0.72rem;
+    font-weight: 600;
+    line-height: 1.4;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 180ms ease, border-color 180ms ease, transform 180ms ease;
+}
+
+.boton-corazones span {
+    color: var(--rubor-200);
+    font-size: 1rem;
+}
+
+.boton-corazones:hover {
+    transform: translateY(-2px);
+    border-color: var(--dorado-claro);
+    background: rgba(184, 25, 50, 0.42);
+}
+
+.corazon-lluvia {
+    position: fixed;
+    z-index: 110;
+    top: -2.5rem;
+    left: var(--posicion-x);
+    color: var(--color-corazon);
+    font-size: var(--tamano-corazon);
+    line-height: 1;
+    pointer-events: none;
+    filter: drop-shadow(0 2px 5px rgba(18, 1, 5, 0.32));
+    animation: caerCorazon var(--duracion-caida) var(--retraso-caida) ease-in forwards;
+}
+
+@keyframes caerCorazon {
+    0% {
+        opacity: 0;
+        transform: translate3d(0, -4vh, 0) rotate(0deg) scale(0.65);
+    }
+
+    12% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate3d(var(--deriva-x), 112vh, 0) rotate(var(--giro-corazon)) scale(1.1);
+    }
+}
+
+@media (max-width: 640px) {
+    .portada-principal {
+        margin-top: 1.25rem;
+    }
+
+    .sello-portada {
+        font-size: 0.58rem;
+    }
+
+    .frase-portada {
+        font-size: 1.35rem;
+    }
+
+    .marco-carta-final {
+        padding: 1.4rem;
+    }
+
+    .pie-carta-final {
+        padding-top: 1rem;
+    }
 }
 
 @media (prefers-reduced-motion: reduce) {

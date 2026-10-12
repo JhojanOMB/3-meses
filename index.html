@@ -5,8 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>3 meses juntos · 11 de octubre</title>
 
+    <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
+    <!-- Favicon -->
     <link rel="icon" type="image/png" href="Img/Denji1.png">
     
     <!-- Fuentes tipográficas -->
@@ -14,9 +16,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Cinzel:wght@600;700;800&family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
 
-    <!-- Efectos y reproductor local -->
+    <!-- Canvas Confetti -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.4/dist/confetti.browser.min.js"></script>
 
+    <!-- Estilos y Tailwind -->
     <link rel="stylesheet" href="styles.css">
     <script src="tailwind-config.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
@@ -25,6 +28,7 @@
 
     <canvas id="lienzoEstrellas" class="fixed inset-0 pointer-events-none z-0"></canvas>
 
+    <!-- Header -->
     <header class="relative z-30 max-w-6xl mx-auto px-4 pt-6 pb-2 flex flex-col sm:flex-row items-center justify-between gap-4">
         <div class="flex items-center gap-3 bg-vinotinto-950/70 backdrop-blur-md px-5 py-2.5 rounded-full border border-oro/30 shadow-lg">
             <span class="text-oro font-cinzel font-bold text-sm sm:text-base tracking-widest">Hoy, 11 de octubre · 3 meses</span>
@@ -38,12 +42,13 @@
         </div>
     </header>
 
+    <!-- Sección Principal / Título y Contador -->
     <section class="relative z-20 text-center max-w-4xl mx-auto px-4 my-6">
         <h1 class="font-serif text-3xl sm:text-5xl md:text-6xl font-bold text-white tracking-tight drop-shadow-md">
             Aunque estés en el Huila, no dejo de pensarte loviuuu muak
         </h1>
         <p class="font-manuscrita text-2xl sm:text-3xl text-oro mt-2 drop-shadow">
-            "No se si estos tres meses junto a ti han sido un sueño o una realidad, pero lo que sí sé es que te extraño y te amo con todo mi corazón"
+            "Pos ante todo lo que nos ha pasado en este poco tiempo, solo se q elegirnos fue lo mejor de ese mierdero de call, y q no me arrepiento de nada, te amo mi bonita"
         </p>
 
         <!-- Contador del aniversario -->
@@ -70,41 +75,15 @@
         </div>
     </section>
 
+    <!-- Main / Collage de Fotos y Reproductor -->
     <main class="relative z-20 max-w-6xl mx-auto px-4 min-h-[750px] my-4 flex items-center justify-center">
-        
-        <!-- Lienzo del collage -->
         <div class="lienzo-collage relative w-full max-w-5xl h-[850px] sm:h-[780px] md:h-[720px] rounded-3xl p-4 sm:p-8 flex items-center justify-center overflow-hidden">
 
-            <div class="absolute bottom-2 right-2 sm:bottom-6 sm:right-6 z-30 pointer-events-none brillo-corazon">
-                <div class="w-24 sm:w-32 md:w-40 filter drop-shadow-2xl">
-                    <svg viewBox="0 0 200 220" class="w-full h-auto" aria-hidden="true">
-                        <path d="M 90 60 C 90 20, 130 20, 130 60" fill="none" stroke="#B81932" stroke-width="16" stroke-linecap="round"/>
-                        <path d="M 110 40 L 110 15" stroke="#8A1327" stroke-width="10" stroke-linecap="round"/>
-                        <path d="M 125 45 L 135 22" stroke="#8A1327" stroke-width="8" stroke-linecap="round"/>
-                        <path d="M 70 50 L 70 25" stroke="#3D0712" stroke-width="12" stroke-linecap="round"/>
-                        <path d="M 60 70 C 40 90, 45 150, 95 195 C 150 150, 165 90, 135 65 C 115 45, 80 50, 60 70 Z" fill="#B81932" stroke="#120105" stroke-width="5"/>
-                        <path d="M 95 195 C 80 140, 90 100, 135 65" fill="none" stroke="#8A1327" stroke-width="6"/>
-                        <path d="M 75 90 Q 90 110 85 140" fill="none" stroke="#F8E79B" stroke-width="3" opacity="0.7"/>
-                        <path d="M 120 95 Q 110 130 125 155" fill="none" stroke="#3D0712" stroke-width="3.5"/>
-                    </svg>
-                </div>
-            </div>
-
-            <div class="detalle-collage denji-uno" hidden>
-                <img id="detalleDenji1" data-serie="Denji" data-numero="1" alt="Detalle Denji 1" class="imagen-detalle">
-            </div>
-            <div class="detalle-collage denji-dos" hidden>
-                <img id="detalleDenji2" data-serie="Denji" data-numero="2" alt="Detalle Denji 2" class="imagen-detalle">
-            </div>
-            <div class="detalle-collage denji-tres" hidden>
-                <img id="detalleDenji3" data-serie="Denji" data-numero="3" alt="Detalle Denji 3" class="imagen-detalle">
-            </div>
-
-            <!-- Marco DyJ 1 -->
+            <!-- Marcos de fotos (Flip Cards) -->
             <div class="absolute top-2 left-2 sm:top-6 sm:left-6 z-20 w-36 sm:w-48 md:w-56 marco-foto -rotate-12 cursor-pointer" id="marco1" onclick="voltearMarco('marco1')">
-            <div class="interior-tarjeta">
-                <div class="frente-tarjeta flex flex-col items-center">
-                    <div class="zona-foto rounded">
+                <div class="interior-tarjeta">
+                    <div class="frente-tarjeta flex flex-col items-center">
+                        <div class="zona-foto rounded">
                             <img id="fotoPareja1" data-serie="DyJ" data-numero="1" data-alternativa="Img/DJ.jpg" alt="DyJ 1" class="w-full h-full object-cover">
                         </div>
                         <div class="mt-3 flex items-center justify-center">
@@ -113,17 +92,16 @@
                     </div>
                     <div class="reverso-tarjeta rounded">
                         <span class="font-cinzel text-xs text-vinotinto-700 font-bold uppercase tracking-widest mb-1">DyJ 1 · 11 de Julio</span>
-                        <p class="font-manuscrita text-xl text-vinotinto-950 leading-tight">"Yo solo se q te amo jdkjskd"</p>
+                        <p class="font-manuscrita text-xl text-vinotinto-950 leading-tight">"Yo solo sé q te amo jdkjskd"</p>
                         <span class="text-[10px] text-vinotinto-600 mt-3 font-sans">Toca para voltear</span>
                     </div>
                 </div>
             </div>
 
-            <!-- Marco DyJ 2 -->
             <div class="absolute top-4 right-2 sm:top-8 sm:right-10 z-20 w-36 sm:w-48 md:w-56 marco-foto rotate-12 cursor-pointer" id="marco2" onclick="voltearMarco('marco2')">
-            <div class="interior-tarjeta">
-                <div class="frente-tarjeta flex flex-col items-center">
-                    <div class="zona-foto rounded">
+                <div class="interior-tarjeta">
+                    <div class="frente-tarjeta flex flex-col items-center">
+                        <div class="zona-foto rounded">
                             <img id="fotoPareja2" data-serie="DyJ" data-numero="2" data-alternativa="Img/DyJ.png" alt="DyJ 2" class="w-full h-full object-cover">
                         </div>
                         <div class="mt-3 flex items-center justify-center">
@@ -132,17 +110,16 @@
                     </div>
                     <div class="reverso-tarjeta rounded">
                         <span class="font-cinzel text-xs text-vinotinto-700 font-bold uppercase tracking-widest mb-1">DyJ 2 · Siempre contigo</span>
-                        <p class="font-manuscrita text-xl text-vinotinto-950 leading-tight">"Creo q la unica suerte q tengo es haberte conocido"</p>
+                        <p class="font-manuscrita text-xl text-vinotinto-950 leading-tight">"Creo q la única suerte q tengo es haberte conocido"</p>
                         <span class="text-[10px] text-vinotinto-600 mt-3 font-sans">Toca para voltear</span>
                     </div>
                 </div>
             </div>
 
-            <!-- Marco DyJ 3 -->
             <div class="absolute bottom-4 left-2 sm:bottom-8 sm:left-8 z-20 w-36 sm:w-48 md:w-56 marco-foto rotate-6 cursor-pointer" id="marco3" onclick="voltearMarco('marco3')">
-            <div class="interior-tarjeta">
-                <div class="frente-tarjeta flex flex-col items-center">
-                    <div class="zona-foto rounded">
+                <div class="interior-tarjeta">
+                    <div class="frente-tarjeta flex flex-col items-center">
+                        <div class="zona-foto rounded">
                             <img id="fotoPareja3" data-serie="DyJ" data-numero="3" data-alternativa="Img/DyJ2.jpg" alt="DyJ 3" class="w-full h-full object-cover">
                         </div>
                         <div class="mt-3 flex items-center justify-center">
@@ -157,11 +134,10 @@
                 </div>
             </div>
 
-            <!-- Marco DyJ 4 -->
             <div class="absolute bottom-20 right-2 sm:bottom-12 sm:right-12 z-20 w-36 sm:w-48 md:w-56 marco-foto -rotate-6 cursor-pointer" id="marco4" onclick="voltearMarco('marco4')">
-            <div class="interior-tarjeta">
-                <div class="frente-tarjeta flex flex-col items-center">
-                    <div class="zona-foto rounded">
+                <div class="interior-tarjeta">
+                    <div class="frente-tarjeta flex flex-col items-center">
+                        <div class="zona-foto rounded">
                             <img id="fotoPareja4" data-serie="DyJ" data-numero="4" data-alternativa="Img/DyJ3.jpg" alt="DyJ 4" class="w-full h-full object-cover">
                         </div>
                         <div class="mt-3 flex items-center justify-center">
@@ -176,15 +152,13 @@
                 </div>
             </div>
 
-            <!-- Reproductor de Universe · Te Amo -->
+            <!-- Reproductor de Música -->
             <div class="relative z-30 w-64 sm:w-72 md:w-80 reproductor-musica rounded-3xl p-5 flex flex-col items-center text-center">
-                
-                <!-- Portada de la canción -->
                 <div class="relative w-full aspect-square bg-white rounded-2xl overflow-hidden mb-4 shadow-inner border border-oro/30">
                     <img id="portadaCancion" src="Img/DyJ.png" class="w-full h-full object-cover" alt="Portada de Universe">
                     <div class="absolute inset-0 bg-gradient-to-t from-vinotinto-950/80 via-transparent to-transparent"></div>
                     <div class="absolute bottom-2 left-3 right-3 text-left">
-                        <span class="text-[10px] text-oro uppercase tracking-widest font-semibold block">Nuestra canción</span>
+                        <span class="text-[10px] text-black uppercase tracking-widest font-semibold block">loko for you maxotaaa</span>
                         <h3 class="font-serif text-sm font-bold text-white truncate">Universe · Te Amo</h3>
                     </div>
                 </div>
@@ -193,18 +167,15 @@
                     <source src="Img/Universe%20-%20Te%20Amo.mp3" type="audio/mpeg">
                 </audio>
 
-                <!-- Tiempo de reproducción -->
                 <div class="w-full flex justify-between text-[11px] font-mono text-rubor-300 mb-1">
                     <span id="tiempoActual">0:00</span>
                     <span id="duracionTotal">0:00</span>
                 </div>
 
-                <!-- Barra de reproducción -->
                 <div class="w-full bg-vinotinto-950/80 h-2 rounded-full overflow-hidden cursor-pointer mb-5 border border-oro/20" onclick="buscarAudio(event)" role="slider" aria-label="Posición de la canción" tabindex="0">
                     <div id="barraProgreso" class="bg-gradient-to-r from-oro/70 via-oro to-rubor-200 h-full w-0 transition-all duration-300"></div>
                 </div>
 
-                <!-- Controles del reproductor -->
                 <div class="flex items-center justify-center gap-6 mb-3">
                     <button onclick="saltarCancion(-10)" aria-label="Retroceder diez segundos" class="text-rubor-200 hover:text-oro text-lg transition-colors">
                         <i class="fa-solid fa-backward-step"></i>
@@ -217,40 +188,47 @@
                     </button>
                 </div>
 
-                <!-- Control de volumen -->
                 <div class="flex items-center gap-2 w-full px-2 mt-1">
                     <i class="fa-solid fa-volume-low text-xs text-rubor-300"></i>
                     <input type="range" id="controlVolumen" min="0" max="1" step="0.01" value="0.7" oninput="cambiarVolumen(this.value)" aria-label="Volumen" class="w-full h-1 bg-vinotinto-900 rounded-lg appearance-none cursor-pointer accent-oro">
                     <i class="fa-solid fa-volume-high text-xs text-rubor-300"></i>
                 </div>
-
             </div>
 
         </div>
     </main>
 
+    <!-- Sección de Regalo Rediseñada -->
     <section class="regalo-seccion relative z-20 max-w-3xl mx-auto px-4 mt-8 text-center" aria-labelledby="tituloRegalo">
-        <div class="bg-vinotinto-950/80 backdrop-blur-md rounded-3xl p-6 sm:p-8 border border-oro/30 shadow-2xl">
+        <div class="bg-vinotinto-950/80 backdrop-blur-md rounded-3xl p-6 sm:p-8 border border-oro/30 shadow-2xl relative overflow-hidden">
             <p class="text-xs uppercase tracking-[0.25em] text-oro font-cinzel font-semibold">Un detallito para ti</p>
-            <h2 id="tituloRegalo" class="font-serif text-2xl sm:text-3xl font-bold text-white mt-2">Te tengo un regalo, bonita</h2>
-            <p class="text-rubor-200 mt-2">Toca la cajita para descubrir tu sorpresa.</p>
+            <h2 id="tituloRegalo" class="font-serif text-2xl sm:text-3xl font-bold text-white mt-2">Te tengo un regalo mi bonita</h2>
+            <p class="text-rubor-200 mt-2 mb-6">Toca la cajita</p>
 
-            <button id="botonAbrirRegalo" class="boton-abrir-regalo mt-5" type="button" aria-expanded="false" aria-controls="contenidoCupon">
-                <span class="caja-regalo" aria-hidden="true">
-                    <span class="caja-regalo-cuerpo"></span>
-                    <span class="caja-regalo-tapa"></span>
-                    <span class="caja-regalo-lazo"></span>
-                </span>
-                <span id="textoBotonRegalo">Abrir mi regalo</span>
+            <!-- Botón de regalo rediseñado con estilo 3D y brillo -->
+            <button id="botonAbrirRegalo" class="boton-regalo-magico mx-auto" type="button" aria-expanded="false" aria-controls="contenidoCupon">
+                <div class="caja-3d">
+                    <div class="tapa-caja">
+                        <div class="lazo-tapa"></div>
+                    </div>
+                    <div class="cuerpo-caja">
+                        <div class="lazo-cuerpo"></div>
+                    </div>
+                </div>
+                <span id="textoBotonRegalo" class="block mt-4 font-cinzel text-sm font-bold text-oro tracking-widest uppercase">Abrir mi regalo</span>
             </button>
 
-            <div id="contenidoCupon" class="contenido-cupon" hidden>
-                <h3 class="font-cinzel text-oro text-lg font-bold mt-6">¡Un cupón para ti!</h3>
-                <img src="Img/Cupon.png" alt="Cupón válido para pedir lo que quieras" class="imagen-cupon mx-auto mt-3">
+            <!-- Contenido del Cupón -->
+            <div id="contenidoCupon" class="contenido-cupon mt-6 transition-all duration-500" hidden>
+                <div class="p-4 bg-vinotinto-900/60 rounded-2xl border border-oro/40 inline-block shadow-inner">
+                    <h3 class="font-cinzel text-oro text-lg font-bold mb-2">¡Un cupón especial para ti!</h3>
+                    <img src="Img/Cupon.png" alt="Cupón válido para pedir lo que quieras" class="imagen-cupon mx-auto rounded-lg shadow-md max-w-full h-auto max-h-72">
+                </div>
             </div>
         </div>
     </section>
 
+    <!-- Sección de Carta / Mensaje final -->
     <section class="relative z-20 max-w-3xl mx-auto px-4 mt-8">
         <div class="bg-vinotinto-950/80 backdrop-blur-md rounded-3xl p-6 sm:p-10 border border-oro/30 shadow-2xl relative overflow-hidden">
             <div class="absolute -right-10 -bottom-10 text-vinotinto-800/20 text-9xl font-serif pointer-events-none select-none">❤</div>
@@ -260,21 +238,19 @@
 
             <div class="space-y-4 text-rubor-100 font-sans text-sm sm:text-base leading-relaxed font-light">
                 <p>
-                    Parece increíble que ya hayan pasado <strong class="text-oro font-semibold">3 meses</strong> desde ese 11 de julio de tanta espera esos tres dias antes me iba a matar jsdksdkjs, q me acuerdo me dañaste mi pedida de noviazgo, y aunque hoy estés en el Huila en super asados, no dejo de pensarte: acá esperanding a q vuelvas.
+                    Parece increíble que ya hayan pasado <strong class="text-oro font-semibold">3 meses</strong> desde ese 11 de julio (de tanta espera esos tres días antes me iba a matar jsdksdkjs, q me acuerdo me dañaste mi pedida de noviazgo), y aunque hoy estés en el Huila en super asados, no dejo de pensarte: acá esperanding a q vuelvas.
                 </p>
                 <p>
-                    Haciendote esto amor me fije que no tenmos fotos oye, necesito mas fotos para los otros regalos
+                    Haciéndote esto amor me fijé que no tenemos fotos oye, necesito más fotos para los otros regalos.
                 </p>
-                
                 <p>
-                    Ahh mandame más fotitos de tu carita <3
+                    Ahh mándame más fotitos de tu carita &lt;3
                 </p>
-
             </div>
 
-            <div class="mt-6 pt-4 border-t border-vinotinto-800 flex justify-between items-center">
+            <div class="mt-6 pt-4 border-t border-vinotinto-800 flex flex-col sm:flex-row justify-between items-center gap-3">
                 <span class="font-manuscrita text-2xl text-oro">Por siempre tuyo el super cansón</span>
-                <button onclick="lanzarLluviaCorazones()" class="boton-corazones text-xs text-rubor-300 hover:text-oro underline decoration-oro/50">Picos en la cuerpa y en esa dos grandes razones</button>
+                <button onclick="lanzarLluviaCorazones()" class="boton-corazones text-xs text-rubor-300 hover:text-oro underline decoration-oro/50 transition-colors">Picos en la cuerpa y en esa dos grandes razones</button>
             </div>
         </div>
     </section>

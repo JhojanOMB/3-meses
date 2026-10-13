@@ -6,19 +6,12 @@ const modeloGatito = document.getElementById("modeloGatito");
 let estrellas = [];
 let formasCorazon = null;
 
-function animarGatitoDeLadoALado() {
+function activarRotacionGatito() {
     if (!modeloGatito || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-    const amplitud = 25 * (Math.PI / 180);
-    const duracionMovimiento = 5000;
-    const mover = (tiempo) => {
-        const fase = (tiempo % duracionMovimiento) / duracionMovimiento;
-        const angulo = Math.sin(fase * Math.PI * 2) * amplitud;
-        modeloGatito.setAttribute("camera-orbit", `${angulo}rad 75deg 115%`);
-        window.requestAnimationFrame(mover);
-    };
-
-    window.requestAnimationFrame(mover);
+    modeloGatito.setAttribute("auto-rotate", "");
+    modeloGatito.setAttribute("rotation-per-second", "30deg");
+    modeloGatito.setAttribute("auto-rotate-delay", "0");
 }
 
 function cargarImagenNumerada(imagen) {
@@ -305,7 +298,7 @@ window.lanzarConfeti = lanzarConfeti;
 window.lanzarLluviaCorazones = lanzarLluviaCorazones;
 
 document.getElementById("botonAbrirRegalo")?.addEventListener("click", alternarRegalo);
-customElements.whenDefined("model-viewer").then(animarGatitoDeLadoALado);
+customElements.whenDefined("model-viewer").then(activarRotacionGatito);
 
 try {
     cargarImagenesFijas();
@@ -324,21 +317,6 @@ if (duracionCancion) {
     duracionCancion.addEventListener("error", () => {
         console.error("El navegador no pudo leer Universe - Te Amo.mp3.", duracionCancion.error);
         mostrarAviso("El navegador no pudo leer Universe - Te Amo.mp3. Verifica que sea un archivo MP3 válido.", true);
-    });
-
-    duracionCancion.play().catch(error => {
-        if (error.name !== "NotAllowedError") {
-            console.error("No se pudo iniciar la canción Universe - Te Amo al abrir la página.", error);
-            mostrarAviso("No se pudo iniciar la canción. Comprueba que el archivo siga dentro de Img.", true);
-            return;
-        }
-
-        console.info("El navegador bloqueó la reproducción automática; se iniciará al primer toque o clic.");
-        document.addEventListener("click", () => {
-            if (duracionCancion.paused) {
-                alternarReproduccion();
-            }
-        }, { once: true });
     });
 }
 
